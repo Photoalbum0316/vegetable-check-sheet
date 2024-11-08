@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>野菜摂取チェックシート</title>
+</head>
+<body>
+    <h1>あなたの野菜摂取チェックシート</h1>
+    <form id="veggieForm">
+        <p>以下の「副菜」にチェックをつけてください。</p>
+        <label><input type="checkbox" name="item"> 酢の物</label><br>
+        <label><input type="checkbox" name="item"> 野菜スープ</label><br>
+        <label><input type="checkbox" name="item"> 生野菜（サラダなど）</label><br>
+        <label><input type="checkbox" name="item"> 野菜炒め</label><br>
+        <label><input type="checkbox" name="item"> きんぴらごぼう</label><br>
+        <!-- 他の項目を追加 -->
+        <button type="button" onclick="calculateResult()">集計</button>
+    </form>
+    <p id="result"></p>
+    
+    <script>
+        function calculateResult() {
+            const items = document.querySelectorAll('input[name="item"]:checked');
+            const count = items.length;
+            let message = "";
+
+            if (count >= 5) {
+                message = "5個以上: 野菜を意識して摂れています！この調子で継続しましょう。";
+            } else if (count >= 3) {
+                message = "3～4個: あと一息！1日あたりあと1～2皿、野菜を摂るよう心がけましょう。";
+            } else if (count >= 1) {
+                message = "1～2個: もう少し頑張りましょう。メニュー選びで野菜が入っているか確認しましょう。";
+            } else {
+                message = "0個: 野菜がかなり不足しているようです。野菜ジュースなどから始めてみましょう。";
+            }
+
+            document.getElementById("result").textContent = message;
+        }
+    </script>
+</body>
+</html>
